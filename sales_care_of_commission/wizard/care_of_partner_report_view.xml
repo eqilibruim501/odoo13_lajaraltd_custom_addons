@@ -31,14 +31,6 @@
         <field name="target">new</field>
     </record>
 
-<!--     <menuitem id="menu_careof_partner"-->
-<!--                  name="C/O Partner Report"-->
-<!--                  groups="account.group_account_user"-->
-<!--                  parent="account.menu_finance_reports"/>-->
-
-<!--    <menuitem id="account_reports_management_menu" name="Management" parent="account.menu_finance_reports" sequence="4"/>-->
-<!--    <menuitem id="account_reports_legal_statements_menu" name="Generic Statements" parent="account.menu_finance_reports" sequence="1" groups="account.group_account_user"/>-->
-
      <menuitem id="menu_careof_partner" name="C/O Partner Report" parent="account.menu_finance_reports" sequence="4" groups="account.group_account_manager"/>
      <menuitem id="menu_careof_partner_commission" name="Commission" action="action_report_careof_commission" parent="menu_careof_partner" sequence="1" groups="account.group_account_manager"/>
 </odoo>
