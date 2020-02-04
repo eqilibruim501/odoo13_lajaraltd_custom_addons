@@ -159,7 +159,7 @@
         <record id="html_form_action" model="ir.actions.act_window">
             <field name="name">HTML Forms</field>
             <field name="res_model">html.form</field>
-            <field name="view_type">form</field>
+<!--            <field name="view_type">form</field>-->
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Create the first HTML Embed form</p>
@@ -169,7 +169,7 @@
         <record id="html_form_history_action" model="ir.actions.act_window">
             <field name="name">HTML Form Submissions</field>
             <field name="res_model">html.form.history</field>
-            <field name="view_type">form</field>
+<!--            <field name="view_type">form</field>-->
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Create the first HTML Embed form</p>
@@ -183,7 +183,7 @@
         <record id="html_form_field_action" model="ir.actions.act_window">
             <field name="name">HTML Forms Fields</field>
             <field name="res_model">html.form.field</field>
-            <field name="view_type">form</field>
+<!--            <field name="view_type">form</field>-->
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">List all Html Fields</p>

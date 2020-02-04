@@ -3,7 +3,8 @@
     <record id="res_config_settings_view_name_form" model="ir.ui.view">
         <field name="name">res_config_settings_view</field>
         <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="hr_payroll_community.res_config_settings_view_form"/>
+<!--        <field name="inherit_id" ref="hr_payroll_community.res_config_settings_view_form"/>-->
+        <field name="inherit_id" ref="hr_payroll_community.res_config_settings_view_form_payroll"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside">
                 <div class="app_settings_block" data-string="Payroll" string="Payroll" data-key="hr_payroll_community"

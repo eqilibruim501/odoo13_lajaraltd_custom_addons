@@ -3,8 +3,8 @@
 import logging
 import cgi
 
-from openerp.http import request
-from openerp import api, fields, models
+from odoo.http import request
+from odoo import api, fields, models
 import ast
 
 _logger = logging.getLogger(__name__)
@@ -43,7 +43,6 @@ class HtmlForm(models.Model):
 
         self.required_fields = required_string
 
-    @api.one
     def generate_form(self):
         html_output = ""
         html_output += "<form method=\"POST\" action=\"" + request.httprequest.host_url + "form/insert\" enctype=\"multipart/form-data\">\n"

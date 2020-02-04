@@ -71,7 +71,6 @@ class Form(models.Model):
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
 
-    @api.multi
     @api.depends('state')
     def _compute_kanban_group_state(self):
         for r in self:
@@ -97,7 +96,6 @@ class Form(models.Model):
         for r in self:
             r.display_state = get_field_selection_label(r, 'state')
 
-    @api.multi
     def write(self, vals):
         if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCEL]:
             # Throw and catch exception (FormioFormException), e.g. to redirect in controller.
@@ -105,7 +103,6 @@ class Form(models.Model):
         res = super(Form, self).write(vals)
         return res
 
-    @api.multi
     def action_client_formio_form(self):
         return {
             'type': 'ir.actions.client',
@@ -113,22 +110,18 @@ class Form(models.Model):
             'target': 'main',
         }
 
-    @api.multi
     def action_draft(self):
         self.ensure_one()
         self.write({'state': STATE_DRAFT})
 
-    @api.multi
     def action_complete(self):
         self.ensure_one()
         self.write({'state': STATE_COMPLETE})
 
-    @api.multi
     def action_cancel(self):
         self.ensure_one()
         self.write({'state': STATE_CANCEL})
 
-    @api.multi
     def action_send_invitation_mail(self):
         self.ensure_one()
 
@@ -215,7 +208,6 @@ class Form(models.Model):
             r.res_name = False
             r.res_info = False
         
-    @api.multi
     def action_formio(self):
         return {
             'type': 'ir.actions.act_url',
@@ -223,7 +215,6 @@ class Form(models.Model):
             'target': 'self',
         }
 
-    @api.multi
     def action_open_res_act_window(self):
         raise NotImplementedError
 
