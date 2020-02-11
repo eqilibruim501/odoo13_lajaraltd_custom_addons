@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="project notify assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <!--<script type="text/javascript" src="/project_advanced_bus/static/src/js/project/project_bus.js"></script>-->
+            <script type="text/javascript" src="/project_advanced_bus/static/src/js/listener/listener.js"></script>
+        </xpath>
+    </template>
+</odoo>

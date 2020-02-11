@@ -10,8 +10,8 @@
     'license': 'LGPL-3',
     'website': 'https://demo.cetmix.com',
     'description': """
- Show all messages, Show sent message, Reply to messages, Forward messages, Move messages, Quote messages
-""",
+        Show all messages, Show sent message, Reply to messages, Forward messages, Move messages, Quote messages
+    """,
     'depends': ['base', 'mail'],
     'live_test_url': 'https://demo.cetmix.com',
     'images': ['static/description/banner.png'],

@@ -29,8 +29,7 @@
     'website': 'http://www.jupical.com',
     'license': 'AGPL-3',
     'depends': ['website','event','event_sale','website_event','website_event_questions',
-                'website_event_sale','website_event_track'
-    ],
+                'website_event_sale','website_event_track'],
     'data': [],
     'application': False,
     'images': ['static/description/poster_image.png'],

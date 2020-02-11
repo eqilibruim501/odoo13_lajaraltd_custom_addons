@@ -74,7 +74,6 @@ class PRTMailMessage(models.Model):
 
     # -- Unlink
     def unlink(self):
-
         # Superuser?
         if self.env.user.id == SUPERUSER_ID:
             return super(PRTMailMessage, self).unlink()
@@ -361,6 +360,7 @@ class PRTMailMessage(models.Model):
     Following keys in context are used:
         - 'check_messages_access': if not set legacy 'search' is performed
     """
+
     @api.model
     def _search(self, args, offset=0, limit=None, order=None, count=False, access_rights_uid=None):
 
@@ -409,6 +409,7 @@ class PRTMailMessage(models.Model):
         Following keys in context are used:
         - 'check_messages_access': if not set legacy 'search' is performed
     """
+
     def read(self, fields=None, load='_classic_read'):
 
         if not self._context.get('check_messages_access', False):
@@ -464,6 +465,7 @@ class PRTMailMessage(models.Model):
     - 'check_messages_access': if not set legacy 'search' is performed
     - 'force_record_reset': in case message refers to non-existing (e.g. removed) record model and res_id will be set NULL
     """
+
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
 
@@ -500,7 +502,8 @@ class PRTMailMessage(models.Model):
 
         # Return Count
         if count:
-            return super(PRTMailMessage, self).search(args=modded_args, offset=offset, limit=limit, order=order, count=True)
+            return super(PRTMailMessage, self).search(args=modded_args, offset=offset, limit=limit, order=order,
+                                                      count=True)
 
         # Get records
         res_ids = self._search(args=modded_args, offset=offset, limit=limit, order=order, count=False)
@@ -696,7 +699,6 @@ class PRTMailMessage(models.Model):
             'context': self.reply_prep_context()
         }
 
-
     # -- Move message
     def move(self):
         self.ensure_one()
@@ -763,7 +765,8 @@ class PRTPartner(models.Model):
     _inherit = "res.partner"
 
     # -- Notify
-    def _notify(self, message, rdata, record, force_send=False, send_after_commit=True, model_description=False, mail_auto_delete=True):
+    def _notify(self, message, rdata, record, force_send=False, send_after_commit=True, model_description=False,
+                mail_auto_delete=True):
         """ Method to send email linked to notified messages. The recipients are
         the recordset on which this method is called.
 
@@ -805,9 +808,12 @@ class PRTPartner(models.Model):
         signature = base_template_ctx.pop("signature", False)
         template_xmlid = message.layout if message.layout else 'mail.message_notification_email'
         try:
-            base_template = self.env.ref(template_xmlid, raise_if_not_found=True).with_context(lang=base_template_ctx['lang'])
+            base_template = self.env.ref(template_xmlid, raise_if_not_found=True).with_context(
+                lang=base_template_ctx['lang'])
         except ValueError:
-            _logger.warning('QWeb template %s not found when sending notification emails. Sending without layouting.' % (template_xmlid))
+            _logger.warning(
+                'QWeb template %s not found when sending notification emails. Sending without layouting.' % (
+                    template_xmlid))
             base_template = False
 
         # prepare notification mail values
@@ -818,7 +824,8 @@ class PRTPartner(models.Model):
             'references': message.parent_id.message_id if message.parent_id else False
         }
         if record:
-            base_mail_values.update(self.env['mail.thread']._notify_specific_email_values_on_records(message, records=record))
+            base_mail_values.update(
+                self.env['mail.thread']._notify_specific_email_values_on_records(message, records=record))
 
         # classify recipients: actions / no action
         recipients = self.env['mail.thread']._notify_classify_recipients_on_records(message, rdata, records=record)
@@ -843,7 +850,8 @@ class PRTPartner(models.Model):
 
             # send email
             for email_chunk in split_every(50, group_tpl_values['recipients']):
-                recipient_values = self.env['mail.thread']._notify_email_recipients_on_records(message, email_chunk, records=record)
+                recipient_values = self.env['mail.thread']._notify_email_recipients_on_records(message, email_chunk,
+                                                                                               records=record)
                 create_values = {
                     'body_html': mail_body,
                     'subject': mail_subject,
@@ -1041,8 +1049,11 @@ class PRTMailComposer(models.TransientModel):
                 if not values.get('res_id'):
                     result['res_id'] = parent.res_id
                 partner_ids = values.get('partner_ids', list()) + \
-                              [(4, xid) for xid in parent.partner_ids.filtered(lambda rec: rec.email not in [self.env.user.email, self.env.user.company_id.email]).ids]
-                if self._context.get('is_private') and parent.author_id:  # check message is private then add author also in partner list.
+                              [(4, xid) for xid in parent.partner_ids.filtered(
+                                  lambda rec: rec.email not in [self.env.user.email,
+                                                                self.env.user.company_id.email]).ids]
+                if self._context.get(
+                        'is_private') and parent.author_id:  # check message is private then add author also in partner list.
                     partner_ids += [(4, parent.author_id.id)]
                 result['partner_ids'] = partner_ids
             elif values.get('model') and values.get('res_id'):
@@ -1073,6 +1084,7 @@ class MessagePartnerAssign(models.TransientModel):
     same_email = fields.Boolean(string="Match Email", default=True,
                                 help="Show Partners with same email address only")
     partner_id = fields.Many2one(string="Assign To", comodel_name='res.partner')
+
 
 # Legacy! keep those imports here to avoid dependency cycle errors
 from odoo.osv import expression
